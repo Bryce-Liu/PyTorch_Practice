@@ -4,7 +4,7 @@ import torch.nn.functional as f
 
 # ========create data set
 x = torch.unsqueeze(torch.linspace(-1, 1, 100), dim=1)
-y = x.pow(2) + 0.2 * torch.rand(x.size())  # y = a * x^2 + b
+y = x.pow(2) + 0.2 * torch.rand(x.size())  # y = a * x^2 + b 其中torch.rand()提供噪音
 
 plt.scatter(x.data.numpy(), y.data.numpy())
 
@@ -35,7 +35,7 @@ Net(
 optimizer = torch.optim.SGD(net.parameters(), lr=0.2)  # 传入 net 的所有参数, 学习率
 loss_func = torch.nn.MSELoss()  # 预测值和真实值的误差计算公式 (均方差)
 
-plt.inuon()
+plt.ion()
 
 for t in range(100):
     prediction = net(x)  # 输入训练数据，输出预测值

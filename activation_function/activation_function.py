@@ -20,7 +20,7 @@ y_softplus = f.softplus(t_data).data.numpy()
 # show data
 plt.figure(1, figsize=(8, 6))
 # =========relu=========
-plt.subplot(221)
+plt.subplot(221)  #要生成两行两列，这是第一个图plt.subplot('行','列','编号')，这里看来","可省略
 plt.plot(np_data, y_relu, c='red', label='relu')
 plt.ylim((-1, 5))
 plt.legend(loc='best')

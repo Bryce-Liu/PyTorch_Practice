@@ -2,7 +2,19 @@ import torch
 from torch.autograd import Variable
 
 tensor = torch.FloatTensor([[1, 2], [3, 4]])
+# required_grad=True代表variable将会参与数据的反向传播
 variable = Variable(tensor, requires_grad=True)
+
+print("tensor:\n", tensor)
+"""
+tensor([[1., 2.],
+        [3., 4.]])
+"""
+print("variable:\n", variable)
+"""
+tensor([[1., 2.],
+        [3., 4.]], requires_grad=True)
+"""
 
 t_out = torch.mean(tensor * tensor)
 v_out = torch.mean(variable * variable)
@@ -19,7 +31,9 @@ v_out:
 tensor(7.5000, grad_fn=<MeanBackward0>)
 """
 
-# 反向传递
+print("反向传递前:\n", variable.grad)  # None
+
+# 反向传递, 只有variable可以反向传播
 v_out.backward()
 print("反向传递结果:\n", variable.grad)
 """
