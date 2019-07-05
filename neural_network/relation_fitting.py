@@ -36,6 +36,7 @@ optimizer = torch.optim.SGD(net.parameters(), lr=0.2)  # 传入 net 的所有参
 loss_func = torch.nn.MSELoss()  # 预测值和真实值的误差计算公式 (均方差)
 
 plt.ion()
+plt.show()
 
 for t in range(100):
     prediction = net(x)  # 输入训练数据，输出预测值
