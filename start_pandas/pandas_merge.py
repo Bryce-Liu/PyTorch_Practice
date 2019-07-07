@@ -141,3 +141,76 @@ result = pd.merge(df1, df2, on=["column"], how="outer", indicator="indicator_col
 2       2  NaN    2.0       right_only
 3       2  NaN    2.0       right_only
 """
+
+# ==========根据行号index合并=========
+left = pd.DataFrame({"A": ["A0", "A1", "A2", "A3"],
+                     "B": ["B0", "B1", "B2", "B3"]},
+                    index=["K0", "K1", "K2", "K4"])
+right = pd.DataFrame({"C": ["C0", "C1", "C2", "C3"],
+                      "D": ["D0", "D1", "D2", "D3"]},
+                     index=["K0", "K3", "K4", "K5"])
+# print(left)
+"""
+     A   B
+K0  A0  B0
+K1  A1  B1
+K2  A2  B2
+K4  A3  B3
+"""
+# print(right)
+"""
+     C   D
+K0  C0  D0
+K3  C1  D1
+K4  C2  D2
+K5  C3  D3
+"""
+# pandas.errors.MergeError: Must pass right_on or right_index=True
+result = pd.merge(left, right, left_index=True, right_index=True, how="outer")
+# print(result)
+"""
+      A    B    C    D
+K0   A0   B0   C0   D0
+K1   A1   B1  NaN  NaN
+K2   A2   B2  NaN  NaN
+K3  NaN  NaN   C1   D1
+K4   A3   B3   C2   D2
+K5  NaN  NaN   C3   D3
+"""
+result = pd.merge(left, right, left_index=True, right_index=True, how="inner")
+# print(result)
+"""
+     A   B   C   D
+K0  A0  B0  C0  D0
+K4  A3  B3  C2  D2
+"""
+
+# ==========处理overlap问题=========
+boys = pd.DataFrame({"key": ["k0", "k1", "k2"],
+                     "age": [1, 2, 3]})
+girls = pd.DataFrame({"key": ["k0", "k0", "k3"],
+                      "age": [4, 5, 6]})
+# print(boys)
+"""
+  key  age
+0  k0    1
+1  k1    2
+2  k2    3
+"""
+# print(girls)
+"""
+  key  age
+0  k0    4
+1  k0    5
+2  k3    6
+"""
+result = pd.merge(boys, girls, on="key", suffixes=["_boy","_girl"], how="outer") # 即将相同列名分为两部分
+# print(result)
+"""
+  key  age_boy  age_girl
+0  k0      1.0       4.0
+1  k0      1.0       5.0
+2  k1      2.0       NaN
+3  k2      3.0       NaN
+4  k3      NaN       6.0
+"""
