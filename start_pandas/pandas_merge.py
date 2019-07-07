@@ -4,7 +4,6 @@
 # @FileName: pandas_merge.py
 
 import pandas as pd
-import numpy as np
 
 # ==========单标签合并=========
 left = pd.DataFrame({"key": ["K0", "K1", "K2", "K3"],
