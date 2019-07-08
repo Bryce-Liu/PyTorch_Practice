@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : 2019/7/8 10:37
 # @Author  : Bryce Liu
-# @FileName: tensor.py
+# @FileName: pytorch_tensor.py
 
 from __future__ import print_function
 import torch as t
