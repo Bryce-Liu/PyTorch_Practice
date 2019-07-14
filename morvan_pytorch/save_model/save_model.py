@@ -14,8 +14,19 @@ y = x.pow(2) + 0.2 * torch.rand(x.size())
 
 def save_network():
     # build neural network
-    torch.nn.Sequential(
-        torch.nn.Linear(1,10),
-        torch.nn.ReLU(),
-        torch.nn.Linear(10,1)
+    net1 = torch.nn.Sequential(
+            torch.nn.Linear(1, 10),
+            torch.nn.ReLU(),
+            torch.nn.Linear(10, 1)
     )
+
+    optimizer = torch.optim.SGD(net1.parameters(), lr=0.5)
+    loss_func = torch.nn.MSELoss()
+
+    # train
+    for t in range(100):
+        prediction = net1(x)modi
+        loss = loss_func(prediction, y)
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
