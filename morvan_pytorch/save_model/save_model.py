@@ -25,7 +25,7 @@ def save_network():
 
     # train
     for t in range(100):
-        prediction = net1(x)modi
+        prediction = net1(x)
         loss = loss_func(prediction, y)
         optimizer.zero_grad()
         loss.backward()
