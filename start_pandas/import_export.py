@@ -6,7 +6,7 @@
 import pandas as pd
 
 data = pd.read_csv("students.csv")
-print(data)
+# print(data)
 """
    Student ID   name  age  gender
 0       10000   Mike   17    male
@@ -17,3 +17,5 @@ print(data)
 5       10005    Bob   18    male
 """
 # data.to_pickle("student.pickle")
+# print(data.values)
+data.to_csv("export_data.csv")
